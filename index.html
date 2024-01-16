@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Words</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #image-container {
+            position: relative;
+        }
+
+        #image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #words-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .draggable-word {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px;
+            cursor: move;
+        }
+
+        .drop-box {
+            width: 100px;
+            height: 100px;
+            border: 2px dashed #3498db;
+            position: relative;
+            margin: 10px;
+        }
+
+        .drop-box.wrong {
+            border-color: #e74c3c;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25%, 75% {
+                transform: translateX(-10px);
+            }
+            50% {
+                transform: translateX(10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="image-container">
+        <img id="image" src="your_image_url.jpg" alt="Image" draggable="false">
+    </div>
+
+    <div id="words-container">
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">Apple</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">Banana</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">Cherry</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">Grape</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">Lemon</div>
+    </div>
+
+    <div id="boxes-container" style="display: flex; justify-content: space-around;">
+        <div class="drop-box" id="box1" ondrop="drop(event, 'box1')" ondragover="allowDrop(event)"></div>
+        <div class="drop-box" id="box2" ondrop="drop(event, 'box2')" ondragover="allowDrop(event)"></div>
+        <div class="drop-box" id="box3" ondrop="drop(event, 'box3')" ondragover="allowDrop(event)"></div>
+        <div class="drop-box" id="box4" ondrop="drop(event, 'box4')" ondragover="allowDrop(event)"></div>
+        <div class="drop-box" id="box5" ondrop="drop(event, 'box5')" ondragover="allowDrop(event)"></div>
+    </div>
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.innerText);
+        }
+
+        function drop(event, boxId) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            var dropBox = document.getElementById(boxId);
+
+            // Check if the dropped word is correct for the respective box
+            if (checkCorrectWord(boxId, data)) {
+                dropBox.classList.remove("wrong");
+                dropBox.style.borderColor = "#2ecc71";
+                dropBox.innerHTML = ""; // Clear any previous content in the box
+                var wordElement = document.createElement("div");
+                wordElement.innerText = data;
+                dropBox.appendChild(wordElement);
+            } else {
+                dropBox.classList.add("wrong");
+                setTimeout(function() {
+                    dropBox.classList.remove("wrong");
+                }, 1000);
+            }
+        }
+
+        function checkCorrectWord(boxId, word) {
+            // Map each box to its correct word
+            var correctWords = {
+                'box1': 'Apple',
+                'box2': 'Banana',
+                'box3': 'Cherry',
+                'box4': 'Grape',
+                'box5': 'Lemon'
+            };
+
+            // Check if the dropped word matches the correct word for the respective box
+            return word.toLowerCase() === correctWords[boxId].toLowerCase();
+        }
+    </script>
+</body>
+</html>
