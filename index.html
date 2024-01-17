@@ -30,7 +30,7 @@
     <title>Drag and Drop Words</title>
     <style>
         body {
-            background-image: url('img/darjah1/bck.jpg');
+            background-image: url('img/bck.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -75,7 +75,7 @@
             // Check if the dropped word is correct for the respective box
             if (checkCorrectWord(boxId, data)) {
                 dropBox.classList.remove("wrong");
-                dropBox.style.borderColor = "#2ecc71";
+                dropBox.style.borderColor = "#000000";
                 dropBox.innerHTML = ""; // Clear any previous content in the box
                 var wordElement = document.createElement("div");
                 wordElement.innerText = data;
