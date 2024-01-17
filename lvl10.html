@@ -39,12 +39,12 @@
 </head>
 <body>
     <div id="image-container">
-        <img id="image" src="img/ten.png" alt="Image" draggable="false">
+        <img id="image" src="img/hat.png" alt="Image" draggable="false">
     </div>
 
     <div id="words-container">
-        <div class="draggable-word" draggable="true" ondragstart="drag(event)">E</div>
-        <div class="draggable-word" draggable="true" ondragstart="drag(event)">N</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">A</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">H</div>
         <div class="draggable-word" draggable="true" ondragstart="drag(event)">T</div>
     </div>
 
@@ -78,7 +78,7 @@
                 dropBox.appendChild(wordElement);
 
                 if (checkAllBoxesCorrect()) {
-                    window.location.href = 'lvl4.html';
+                    window.location.href = 'stage1.html';
                 }
             } else {
                 dropBox.classList.add("wrong");
@@ -91,9 +91,9 @@
         function checkCorrectWord(boxId, word) {
             // Map each box to its correct word
             var correctWords = {
-                'box1': 'T',
-                'box2': 'E',
-                'box3': 'N'
+                'box1': 'H',
+                'box2': 'A',
+                'box3': 'T'
             };
 
             // Check if the dropped word matches the correct word for the respective box
