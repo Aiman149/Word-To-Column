@@ -9,11 +9,14 @@ body {
 
 #image-container {
     position: relative;
+    width: 100%;
+    max-width: 200px;
 }
 
 #image {
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    border: 8px solid #3498db;
 }
 
 #words-container {

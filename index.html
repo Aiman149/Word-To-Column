@@ -39,14 +39,14 @@
 </head>
 <body>
     <div id="image-container">
-        <img id="image" src="your_image_url.jpg" alt="Image" draggable="false">
+        <img id="image" src="img/peach.jpg" alt="Image" draggable="false">
     </div>
 
     <div id="words-container">
         <div class="draggable-word" draggable="true" ondragstart="drag(event)">A</div>
         <div class="draggable-word" draggable="true" ondragstart="drag(event)">E</div>
-        <div class="draggable-word" draggable="true" ondragstart="drag(event)">R</div>
-        <div class="draggable-word" draggable="true" ondragstart="drag(event)">M</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">C</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">P</div>
         <div class="draggable-word" draggable="true" ondragstart="drag(event)">H</div>
     </div>
 
@@ -91,10 +91,10 @@
         function checkCorrectWord(boxId, word) {
             // Map each box to its correct word
             var correctWords = {
-                'box1': 'M',
+                'box1': 'P',
                 'box2': 'E',
-                'box3': 'R',
-                'box4': 'A',
+                'box3': 'A',
+                'box4': 'C',
                 'box5': 'H'
             };
 
