@@ -27,7 +27,7 @@
         type="text/javascript"></script>
     <script src="js/DragDropTouch.js"></script>
     <script src="js/app.js"></script>
-    <title>Permainan Tarik Perkataan</title>
+    <title>Drag and Drop Words</title>
     <style>
         body {
             background-image: url('img/bck.jpg');
@@ -39,19 +39,21 @@
 </head>
 <body>
     <div id="image-container">
-        <img id="image" src="img/sea.jpg" alt="Image" draggable="false">
+        <img id="image" src="img/ball.jpg" alt="Image" draggable="false">
     </div>
 
     <div id="words-container">
         <div class="draggable-word" draggable="true" ondragstart="drag(event)">A</div>
-        <div class="draggable-word" draggable="true" ondragstart="drag(event)">E</div>
-        <div class="draggable-word" draggable="true" ondragstart="drag(event)">S</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">L</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">L</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">B</div>
     </div>
 
     <div id="boxes-container" style="display: flex; justify-content: space-around;">
         <div class="drop-box" id="box1" ondrop="drop(event, 'box1')" ondragover="allowDrop(event)"></div>
         <div class="drop-box" id="box2" ondrop="drop(event, 'box2')" ondragover="allowDrop(event)"></div>
         <div class="drop-box" id="box3" ondrop="drop(event, 'box3')" ondragover="allowDrop(event)"></div>
+        <div class="drop-box" id="box4" ondrop="drop(event, 'box4')" ondragover="allowDrop(event)"></div>
     </div>
 
     <script>
@@ -78,7 +80,7 @@
                 dropBox.appendChild(wordElement);
 
                 if (checkAllBoxesCorrect()) {
-                    window.location.href = 'lvl2.html';
+                    window.location.href = 'lvl14.html';
                 }
             } else {
                 dropBox.classList.add("wrong");
@@ -91,9 +93,10 @@
         function checkCorrectWord(boxId, word) {
             // Map each box to its correct word
             var correctWords = {
-                'box1': 'S',
-                'box2': 'E',
-                'box3': 'A'
+                'box1': 'B',
+                'box2': 'A',
+                'box3': 'L',
+                'box4': 'L'
             };
 
             // Check if the dropped word matches the correct word for the respective box
@@ -101,7 +104,7 @@
         }
 
         function checkAllBoxesCorrect() {
-            var boxes = ['box1', 'box2', 'box3']; // Add more boxes if needed
+            var boxes = ['box1', 'box2', 'box3', 'box4']; // Add more boxes if needed
             for (var i = 0; i < boxes.length; i++) {
                 var boxId = boxes[i];
                 var dropBox = document.getElementById(boxId);
