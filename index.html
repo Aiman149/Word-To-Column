@@ -3,64 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <link href="https://cdn.wijmo.com/5.latest/styles/wijmo.min.css"
+        rel="stylesheet" type="text/css" />
+    <script src="https://cdn.wijmo.com/5.latest/controls/wijmo.min.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.wijmo.com/5.latest/controls/wijmo.input.min.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.wijmo.com/5.latest/controls/wijmo.grid.min.js"
+        type="text/javascript"></script>
+    <script
+        src="https://cdn.wijmo.com/5.latest/controls/wijmo.grid.filter.min.js"
+        type="text/javascript"></script>
+    <script
+        src="https://cdn.wijmo.com/5.latest/controls/wijmo.grid.grouppanel.min.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.wijmo.com/5.latest/controls/wijmo.olap.min.js"
+        type="text/javascript"></script>
+    <script
+        src="https://cdn.wijmo.com/5.latest/interop/angular/wijmo.angular.min.js"
+        type="text/javascript"></script>
+    <script src="js/DragDropTouch.js"></script>
+    <script src="js/app.js"></script>
     <title>Drag and Drop Words</title>
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            height: 100vh;
-            margin: 0;
-        }
-
-        #image-container {
-            position: relative;
-        }
-
-        #image {
-            max-width: 100%;
-            height: auto;
-        }
-
-        #words-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .draggable-word {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 10px;
-            cursor: move;
-        }
-
-        .drop-box {
-            width: 100px;
-            height: 100px;
-            border: 2px dashed #3498db;
-            position: relative;
-            margin: 10px;
-        }
-
-        .drop-box.wrong {
-            border-color: #e74c3c;
-            animation: shake 0.5s;
-        }
-
-        @keyframes shake {
-            0%, 100% {
-                transform: translateX(0);
-            }
-            25%, 75% {
-                transform: translateX(-10px);
-            }
-            50% {
-                transform: translateX(10px);
-            }
-        }
-    </style>
 </head>
 <body>
     <div id="image-container">
@@ -68,11 +35,11 @@
     </div>
 
     <div id="words-container">
-        <div class="draggable-word" draggable="true" ondragstart="drag(event)">Apple</div>
-        <div class="draggable-word" draggable="true" ondragstart="drag(event)">Banana</div>
-        <div class="draggable-word" draggable="true" ondragstart="drag(event)">Cherry</div>
-        <div class="draggable-word" draggable="true" ondragstart="drag(event)">Grape</div>
-        <div class="draggable-word" draggable="true" ondragstart="drag(event)">Lemon</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">A</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">E</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">R</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">M</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">H</div>
     </div>
 
     <div id="boxes-container" style="display: flex; justify-content: space-around;">
@@ -116,11 +83,11 @@
         function checkCorrectWord(boxId, word) {
             // Map each box to its correct word
             var correctWords = {
-                'box1': 'Apple',
-                'box2': 'Banana',
-                'box3': 'Cherry',
-                'box4': 'Grape',
-                'box5': 'Lemon'
+                'box1': 'M',
+                'box2': 'E',
+                'box3': 'R',
+                'box4': 'A',
+                'box5': 'H'
             };
 
             // Check if the dropped word matches the correct word for the respective box
