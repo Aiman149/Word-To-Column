@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <link href="https://cdn.wijmo.com/5.latest/styles/wijmo.min.css"
+        rel="stylesheet" type="text/css" />
+    <script src="https://cdn.wijmo.com/5.latest/controls/wijmo.min.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.wijmo.com/5.latest/controls/wijmo.input.min.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.wijmo.com/5.latest/controls/wijmo.grid.min.js"
+        type="text/javascript"></script>
+    <script
+        src="https://cdn.wijmo.com/5.latest/controls/wijmo.grid.filter.min.js"
+        type="text/javascript"></script>
+    <script
+        src="https://cdn.wijmo.com/5.latest/controls/wijmo.grid.grouppanel.min.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.wijmo.com/5.latest/controls/wijmo.olap.min.js"
+        type="text/javascript"></script>
+    <script
+        src="https://cdn.wijmo.com/5.latest/interop/angular/wijmo.angular.min.js"
+        type="text/javascript"></script>
+    <script src="js/DragDropTouch.js"></script>
+    <script src="js/app.js"></script>
+    <title>Drag and Drop Words</title>
+    <style>
+        body {
+            background-image: url('img/bck.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
+    <div id="image-container">
+        <img id="image" src="img/tree.png" alt="Image" draggable="false">
+    </div>
+
+    <div id="words-container">
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">E</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">T</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">R</div>
+        <div class="draggable-word" draggable="true" ondragstart="drag(event)">E</div>
+    </div>
+
+    <div id="boxes-container" style="display: flex; justify-content: space-around;">
+        <div class="drop-box" id="box1" ondrop="drop(event, 'box1')" ondragover="allowDrop(event)"></div>
+        <div class="drop-box" id="box2" ondrop="drop(event, 'box2')" ondragover="allowDrop(event)"></div>
+        <div class="drop-box" id="box3" ondrop="drop(event, 'box3')" ondragover="allowDrop(event)"></div>
+        <div class="drop-box" id="box4" ondrop="drop(event, 'box4')" ondragover="allowDrop(event)"></div>
+    </div>
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.innerText);
+        }
+
+        function drop(event, boxId) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            var dropBox = document.getElementById(boxId);
+
+            // Check if the dropped word is correct for the respective box
+            if (checkCorrectWord(boxId, data)) {
+                dropBox.classList.remove("wrong");
+                dropBox.style.borderColor = "#000000";
+                dropBox.innerHTML = ""; // Clear any previous content in the box
+                var wordElement = document.createElement("div");
+                wordElement.innerText = data;
+                dropBox.appendChild(wordElement);
+
+                if (checkAllBoxesCorrect()) {
+                    window.location.href = 'stage2.html';
+                }
+            } else {
+                dropBox.classList.add("wrong");
+                setTimeout(function() {
+                    dropBox.classList.remove("wrong");
+                }, 1000);
+            }
+        }
+
+        function checkCorrectWord(boxId, word) {
+            // Map each box to its correct word
+            var correctWords = {
+                'box1': 'T',
+                'box2': 'R',
+                'box3': 'E',
+                'box4': 'E'
+            };
+
+            // Check if the dropped word matches the correct word for the respective box
+            return word.toLowerCase() === correctWords[boxId].toLowerCase();
+        }
+
+        function checkAllBoxesCorrect() {
+            var boxes = ['box1', 'box2', 'box3', 'box4']; // Add more boxes if needed
+            for (var i = 0; i < boxes.length; i++) {
+                var boxId = boxes[i];
+                var dropBox = document.getElementById(boxId);
+                var word = dropBox.innerText.trim();
+                
+                // Check if any box is empty or contains an incorrect word
+                if (!word || !checkCorrectWord(boxId, word)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
